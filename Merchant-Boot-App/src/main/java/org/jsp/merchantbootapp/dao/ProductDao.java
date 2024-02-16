@@ -49,4 +49,8 @@ public class ProductDao {
 	public List<Product> findByMerchantId(int id) {
 		return productRepository.findByMerchantId(id);
 	}
+
+	public Optional<Product> findByMerchantPhone(long phone, String password) {
+		return productRepository.findByMerchantPhone(phone, password);
+	}
 }

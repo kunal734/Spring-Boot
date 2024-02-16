@@ -128,4 +128,16 @@ public class ProductService {
 		}
 		throw new ProductNotFoundException("Invalid Merchant Id");
 	}
+
+	public ResponseEntity<ResponseStructure<List<Product>>> findByMerchantPhone(long phone, String password) {
+		ResponseStructure<List<Product>> structure = new ResponseStructure<>();
+		Optional<Merchant> merchant = merchantDao.verifyMerchantByPhone(phone, password);
+		if (merchant.isPresent()) {
+			structure.setData(merchant.get().getProducts());
+			structure.setMessage("Products Found");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+		}
+		throw new ProductNotFoundException("Invalid Merchant Id");
+	}
 }

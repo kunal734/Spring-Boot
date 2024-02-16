@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -61,5 +62,11 @@ public class ProductController {
 	@GetMapping("/find-by-merchant/{merchant_id}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findByMerchantId(@PathVariable int merchant_id) {
 		return service.findByMerchantId(merchant_id);
+	}
+
+	@PostMapping("/find-by-merchant-phone")
+	public ResponseEntity<ResponseStructure<List<Product>>> findByMerchantPhone(@RequestParam long phone,
+			@RequestParam String password) {
+		return service.findByMerchantPhone(phone, password);
 	}
 }
